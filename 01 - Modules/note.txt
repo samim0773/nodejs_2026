@@ -1,0 +1,126 @@
+==============================
+Node.js Modules - Notes
+==============================
+
+1. What is a Module?
+------------------------------
+A module is a reusable piece of code that provides specific functionality.
+In simple words:
+Module = collection of related code (functions, variables, objects)
+
+
+2. Types of Modules in Node.js
+------------------------------
+
+1. External Modules (3rd Party)
+- Installed using npm
+- Created by other developers
+Example:
+npm install jsonwebtoken
+
+
+2. Built-in Modules (Core Modules)
+- Already available in Node.js
+- No need to install
+
+Example:
+const fs = require('fs');
+
+const fileData = fs.readFileSync('./note.txt', 'utf-8');
+console.log(fileData);
+
+
+3. User-defined Modules (Custom Modules)
+- Created by developer
+- Used within project
+
+Example:
+// math.js
+module.exports.add = (a, b) => a + b;
+
+// app.js
+const math = require('./math');
+console.log(math.add(2, 3));
+
+
+3. How Node.js Executes Code (Module Wrapper)
+------------------------------------------------
+Node.js does NOT run your code directly.
+It wraps your code inside a function like this:
+
+function wrapper(exports, require, module, __filename, __dirname) {
+    // your code here
+}
+
+Because of this, we can use:
+- require
+- module
+- exports
+- __filename
+- __dirname
+
+
+4. How require() Works
+------------------------------
+
+Syntax:
+require('<module-name>')
+
+Step-by-step:
+
+1. External Module
+require('jsonwebtoken')
+- Node checks node_modules folder
+- If found → load module
+- If not → go to next step
+
+2. Built-in Module
+require('fs')
+- Node checks core modules
+- If found → load module
+- If not → error
+
+3. User-defined Module
+require('./inrToDollar.js')
+- "./" means current directory
+- Node looks for file in current folder
+- If found → load module
+- If not → error
+
+
+5. Key Differences
+------------------------------
+
+External Module:
+require('express') → from node_modules
+
+Built-in Module:
+require('fs') → Node.js core module
+
+User-defined Module:
+require('./file') → local file
+
+
+6. Important Points
+------------------------------
+- Every file in Node.js is a module
+- Modules help organize code
+- require() is used to load modules
+- module.exports is used to share code
+- "./" is required for local modules
+
+
+7. Quick Summary
+------------------------------
+- Module = reusable code
+- Types:
+  External → npm install
+  Built-in → already available
+  Custom → created by developer
+- Node wraps code inside a function
+- require() loads modules based on type/path
+
+==============================
+NPM - node package manager
+============================== 
+
